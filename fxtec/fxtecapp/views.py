@@ -22,13 +22,13 @@ def view(request):
     for i in range(1, count):
         equity = list(Robot.objects.filter(id=i).values('EQUITY')) # equity = [{'equity': 8901231.12}]
         equity = equity[0] # equity = {'equity': 8901231.12}
-        EQT1.append(equity['EQUITY']) # EQT1 = [8901231.12]
+        EQT1.append(float(equity['EQUITY'])) # EQT1 = [8901231.12]
     time.sleep(3) # Wait 3s
     # Get equity for second time
     for i in range(1, count):
         equity = list(Robot.objects.filter(id=i).values('EQUITY')) # equity = [{'equity': 8901231.12}]
         equity = equity[0] # equity = {'equity': 8901231.12}
-        EQT2.append(equity['EQUITY']) # EQT2 = [8901231.12]
+        EQT2.append(float(equity['EQUITY'])) # EQT2 = [8901231.12]
         # EQT2.append(x)
     # Compare equity
     for i in range(countrobot):
@@ -49,13 +49,13 @@ def view(request):
     for i in range(1, count):
         times = list(Robot.objects.filter(id=i).values('TIME')) # [{'time': 12367541982}]
         times = times[0] # {'time': 12367541982}
-        TIME1.append(times['TIME']) # 12367541982
+        TIME1.append(float(times['TIME'])) # 12367541982
     time.sleep(3) # Wait 3s
     # Get time for second time
     for i in range(1, count):
         times = list(Robot.objects.filter(id=i).values('TIME')) # [{'time': 12367541982}]
         times = times[0] # {'time': 12367541982}
-        TIME2.append(times['TIME']) # 12367541982
+        TIME2.append(float(times['TIME'])) # 12367541982
     # Compare time
     for i in range(countrobot):
         if TIME1[i] < TIME2[i]:
