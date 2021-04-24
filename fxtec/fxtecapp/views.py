@@ -50,7 +50,7 @@ def view(request):
         times = list(Robot.objects.filter(id=i).values('TIME')) # [{'time': 12367541982}]
         times = times[0] # {'time': 12367541982}
         TIME1.append(float(times['TIME'])) # 12367541982
-    time.sleep(3) # Wait 3s
+    time.sleep(15) # Wait 3s
     # Get time for second time
     for i in range(1, count):
         times = list(Robot.objects.filter(id=i).values('TIME')) # [{'time': 12367541982}]
