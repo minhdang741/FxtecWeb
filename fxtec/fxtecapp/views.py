@@ -3,8 +3,77 @@ from fxtecapp.models import Robot
 from django.http import HttpResponse
 import time
 import random
+from rest_framework import generics
+from .serializers import RobotModelSerializer
 # Create your views here.
 
+class RobotListAPIView(generics.ListAPIView):
+# def robotview(generics.ListAPIView):
+    serializer_class = RobotModelSerializer
+    
+    def get_queryset(self):
+            ##### Get equity for first time
+        countrobot = Robot.objects.all().count() # Count robot
+        count = countrobot + 1
+        EQT1 = []
+        EQT2 = []
+        x = random.randrange(8000000, 9999999, 1000000)
+        for i in range(1, count):
+            equity = list(Robot.objects.filter(id=i).values('EQUITY')) # equity = [{'equity': 8901231.12}]
+            equity = equity[0] # equity = {'equity': 8901231.12}
+            EQT1.append(equity['EQUITY']) # EQT1 = [8901231.12]
+        ##### Get equity for first time #####
+
+        ##### Get time for first time
+        TIME1 = []
+        TIME2 = []
+        for i in range(1, count):
+            times = list(Robot.objects.filter(id=i).values('TIME')) # [{'time': 12367541982}]
+            times = times[0] # {'time': 12367541982}
+            TIME1.append(times['TIME']) # 12367541982
+        ##### Get time for first time #####
+
+        time.sleep(3) # Wait 3s
+
+        ##### Get equity for second time
+        for i in range(1, count):
+            equity = list(Robot.objects.filter(id=i).values('EQUITY')) # equity = [{'equity': 8901231.12}]
+            equity = equity[0] # equity = {'equity': 8901231.12}
+            # EQT2.append(equity['EQUITY']) # EQT2 = [8901231.12]
+            EQT2.append(x)
+        ##### Get equity for second time #####
+
+        ##### Get time for second time
+        for i in range(1, count):
+            times = list(Robot.objects.filter(id=i).values('TIME')) # [{'time': 12367541982}]
+            times = times[0] # {'time': 12367541982}
+            TIME2.append(times['TIME']) # 12367541982
+        ##### Get time for second time #####
+
+        ##### Compare equity
+        for i in range(countrobot):
+            if EQT1[i] >= EQT2[i]:
+                i = i + 1 # EQT_list begin with 0 but robot id begins with 1
+                # EQT3.append('True')
+                Robot.objects.filter(id=i).update(EQTCHECK='True')
+            else:
+                i = i + 1
+                # EQT3.append('False')
+                Robot.objects.filter(id=i).update(EQTCHECK='False')
+        ##### Compare equity #####
+
+        ##### Compare time
+        for i in range(countrobot):
+            if TIME1[i] < TIME2[i]:
+                i = i + 1 # TIME_list begins with 0 but robot id begins with 1
+                Robot.objects.filter(id=i).update(TIMECHECK='1')
+            else:
+                Robot.objects.filter(id=i).update(TIMECHECK='1')
+        ##### Compare time #####
+        return Robot.objects.all()
+
+
+'''
 def view(request):
     """
     count = Robot.objects.all().count()
@@ -62,12 +131,14 @@ def view(request):
             i = i + 1 # TIME_list begins with 0 but robot id begins with 1
             Robot.objects.filter(id=i).update(TIMECHECK='1')
         else:
-            Robot.objects.filter(id=i).update(TIMECHECK='0')
+            Robot.objects.filter(id=i).update(TIMECHECK='1')
     ##### Check time #####
 
     DATA = {'robotdata': Robot.objects.all()} # Query all robot data
     return render(request, 'View.html', DATA)
     # return HttpResponse(x)
+'''
+
 '''
 def checkequity(self):
         countrobot = Robot.objects.all().count()

@@ -15,11 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-import fxtecapp.views
+from fxtecapp.views import *
 import account.views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', account.views.login, name='login'),
-    path('view/', fxtecapp.views.view, name='view'),
+    path('view/', RobotListAPIView.as_view(), name='view'),
 ]

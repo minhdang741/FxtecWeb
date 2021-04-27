@@ -5,7 +5,6 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="Refresh" content="15">
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
@@ -74,7 +73,7 @@
   </style>
 </head>
 
-<body style="background-color: #3c3c3c;">
+<body>
   <!-- Top Container -->
   <div class="w3-top">
     <div class="w3-bar w3-2021-inkwell w3-large" style="border-bottom: 1px solid white">
@@ -109,7 +108,7 @@
   <!-- !PAGE CONTENT! -->
   <div class="w3-main" id="show" style="margin-top: 43px; display: block">
     <!-- Header -->
-    <header class="w3-container" style="padding-top: 22px"></header>
+    <header class="w3-container" style="padding-top: 22px"><button onclick="loop()">TRY</button></header>
     <section class="w3-container w3-center" style="padding-top: 50px"></section>
     <section class="w3-container">
       <div class="w3-panel" style="padding: 0px 3%">
@@ -127,159 +126,7 @@
             <th>Warning</th>
             <th>Connect</th>
           </thead>
-          {% for dt in robotdata %}
-          <!-- Check robot connection-->
-          {% if dt.TIMECHECK == 1 %}
-          <!-- Check equity-->
-          {% if dt.EQTCHECK == True %}
-          <!-- Check warning -->
-          {% if dt.ACCOUNT_WARNING_LEVEL == '0' %}
-          <tr class="w3-text-green w3-hover-blue">
-            <!-- timecheck = 1, eqtcheck = true-->
-            <td>{{ dt.LOGIN }}</td>
-            <td>{{ dt.VPS }}</td>
-            <td>{{ dt.CURRENCY }}</td>
-            <td>{{ dt.BALANCE }}</td>
-            <td>{{ dt.EQUITY }}</td>
-            <td>{{ dt.MARGIN }}</td>
-            <td>{{ dt.BEAR_LEVEL }}</td>
-            <td>{{ dt.RUN }}</td>
-            <td>{{ dt.ROI_LEVEL }}</td>
-            <td>{{ dt.ACCOUNT_WARNING_LEVEL }}</td>
-            <td>{{ dt.TIMECHECK }}</td>
-          </tr>
-          {% elif dt.ACCOUNT_WARNING_LEVEL == '1' %}
-          <tr class="w3-text-green w3-hover-blue">
-            <!-- timecheck = 1, eqtcheck = true-->
-            <td>{{ dt.LOGIN }}</td>
-            <td>{{ dt.VPS }}</td>
-            <td>{{ dt.CURRENCY }}</td>
-            <td>{{ dt.BALANCE }}</td>
-            <td>{{ dt.EQUITY }}</td>
-            <td>{{ dt.MARGIN }}</td>
-            <td>{{ dt.BEAR_LEVEL }}</td>
-            <td>{{ dt.RUN }}</td>
-            <td>{{ dt.ROI_LEVEL }}</td>
-            <td class="w3-yellow">{{ dt.ACCOUNT_WARNING_LEVEL }}</td>
-            <td>{{ dt.TIMECHECK }}</td>
-          </tr>
-          {% elif dt.ACCOUNT_WARNING_LEVEL == '2' %}
-          <tr class="w3-text-green w3-hover-blue">
-            <!-- timecheck = 1, eqtcheck = true-->
-            <td>{{ dt.LOGIN }}</td>
-            <td>{{ dt.VPS }}</td>
-            <td>{{ dt.CURRENCY }}</td>
-            <td>{{ dt.BALANCE }}</td>
-            <td>{{ dt.EQUITY }}</td>
-            <td>{{ dt.MARGIN }}</td>
-            <td>{{ dt.BEAR_LEVEL }}</td>
-            <td>{{ dt.RUN }}</td>
-            <td>{{ dt.ROI_LEVEL }}</td>
-            <td class="w3-orange">{{ dt.ACCOUNT_WARNING_LEVEL }}</td>
-            <td>{{ dt.TIMECHECK }}</td>
-          </tr>
-          {% elif dt.ACCOUNT_WARNING_LEVEL == '3' %}
-          <tr class="w3-text-green w3-hover-blue">
-            <!-- timecheck = 1, eqtcheck = true-->
-            <td>{{ dt.LOGIN }}</td>
-            <td>{{ dt.VPS }}</td>
-            <td>{{ dt.CURRENCY }}</td>
-            <td>{{ dt.BALANCE }}</td>
-            <td>{{ dt.EQUITY }}</td>
-            <td>{{ dt.MARGIN }}</td>
-            <td>{{ dt.BEAR_LEVEL }}</td>
-            <td>{{ dt.RUN }}</td>
-            <td>{{ dt.ROI_LEVEL }}</td>
-            <td class="w3-red">{{ dt.ACCOUNT_WARNING_LEVEL }}</td>
-            <td>{{ dt.TIMECHECK }}</td>
-          </tr>
-          {% endif %}
-          <!--End Check warning -->
-          {% else %}
-          <!-- timecheck = 1, eqtcheck = false-->
-          <!-- Check warning -->
-          {% if dt.ACCOUNT_WARNING_LEVEL == '0' %}
-          <!-- timecheck = 1, eqtcheck = false-->
-          <tr class="w3-text-red w3-hover-blue">
-            <td>{{ dt.LOGIN }}</td>
-            <td>{{ dt.VPS }}</td>
-            <td>{{ dt.CURRENCY }}</td>
-            <td>{{ dt.BALANCE }}</td>
-            <td>{{ dt.EQUITY }}</td>
-            <td>{{ dt.MARGIN }}</td>
-            <td>{{ dt.BEAR_LEVEL }}</td>
-            <td>{{ dt.RUN }}</td>
-            <td>{{ dt.ROI_LEVEL }}</td>
-            <td>{{ dt.ACCOUNT_WARNING_LEVEL }}</td>
-            <td>{{ dt.TIMECHECK }}</td>
-          </tr>
-          {% elif dt.ACCOUNT_WARNING_LEVEL == '1' %}
-          <!-- timecheck = 1, eqtcheck = false-->
-          <tr class="w3-text-green w3-hover-blue">
-            <td>{{ dt.LOGIN }}</td>
-            <td>{{ dt.VPS }}</td>
-            <td>{{ dt.CURRENCY }}</td>
-            <td>{{ dt.BALANCE }}</td>
-            <td>{{ dt.EQUITY }}</td>
-            <td>{{ dt.MARGIN }}</td>
-            <td>{{ dt.BEAR_LEVEL }}</td>
-            <td>{{ dt.RUN }}</td>
-            <td>{{ dt.ROI_LEVEL }}</td>
-            <td class="w3-yellow">{{ dt.ACCOUNT_WARNING_LEVEL }}</td>
-            <td>{{ dt.TIMECHECK }}</td>
-          </tr>
-          {% elif dt.ACCOUNT_WARNING_LEVEL == '2' %}
-          <!-- timecheck = 1, eqtcheck = false-->
-          <tr class="w3-text-red w3-hover-blue">
-            <td>{{ dt.LOGIN }}</td>
-            <td>{{ dt.VPS }}</td>
-            <td>{{ dt.CURRENCY }}</td>
-            <td>{{ dt.BALANCE }}</td>
-            <td>{{ dt.EQUITY }}</td>
-            <td>{{ dt.MARGIN }}</td>
-            <td>{{ dt.BEAR_LEVEL }}</td>
-            <td>{{ dt.RUN }}</td>
-            <td>{{ dt.ROI_LEVEL }}</td>
-            <td class="w3-orange">{{ dt.ACCOUNT_WARNING_LEVEL }}</td>
-            <td>{{ dt.TIMECHECK }}</td>
-          </tr>
-          {% elif dt.ACCOUNT_WARNING_LEVEL == '3' %}
-          <!-- timecheck = 1, eqtcheck = false-->
-          <tr class="w3-text-red w3-hover-blue">
-            <td>{{ dt.LOGIN }}</td>
-            <td>{{ dt.VPS }}</td>
-            <td>{{ dt.CURRENCY }}</td>
-            <td>{{ dt.BALANCE }}</td>
-            <td>{{ dt.EQUITY }}</td>
-            <td>{{ dt.MARGIN }}</td>
-            <td>{{ dt.BEAR_LEVEL }}</td>
-            <td>{{ dt.RUN }}</td>
-            <td>{{ dt.ROI_LEVEL }}</td>
-            <td class="w3-red">{{ dt.ACCOUNT_WARNING_LEVEL }}</td>
-            <td>{{ dt.TIMECHECK }}</td>
-          </tr>
-          {% endif %}
-          <!-- End Check warning -->
-          {% endif %}
-          <!-- End Check equity -->
-          {% else %}
-          <!-- timecheck = 0-->
-          <tr class="w3-hover-blue w3-text-white">
-            <td>{{ dt.LOGIN }}</td>
-            <td>{{ dt.VPS }}</td>
-            <td>{{ dt.CURRENCY }}</td>
-            <td>{{ dt.BALANCE }}</td>
-            <td>{{ dt.EQUITY }}</td>
-            <td>{{ dt.MARGIN }}</td>
-            <td>{{ dt.BEAR_LEVEL }}</td>
-            <td>{{ dt.RUN }}</td>
-            <td>{{ dt.ROI_LEVEL }}</td>
-            <td>{{ dt.ACCOUNT_WARNING_LEVEL }}</td>
-            <td class="w3-red">{{ dt.TIMECHECK }}</td>
-          </tr>
-          {% endif %}
-          <!-- End Check robot connection -->
-          {% endfor %}
+          <div class="demo"></div>
         </table>
       </div>
     </section>
@@ -293,6 +140,32 @@
     } else {
       x.style.display = "none";
     }
+  }
+
+  function loop(){
+    setInterval(function() {
+        $.ajax({
+            method: "GET",
+            url: "view/",
+            success: function(data) {
+                $(".demo").empty();
+                $.each(data, function (key, value) {
+                    var robotlogin = value.LOGIN;
+                    var robotvps = value.VPS;
+                    var robotcurrency = value.CURRENCY
+                    var robotbalance = value.BALANCE;
+                    var robotequity = value.EQUITY;
+                    $(".demo").append(
+                       "<tr><td>" + robotlogin + "</td><td>" + robotvps + "</td><td>" + robotcurrency + "</td><td>" + robotequity + "</td></tr>"
+                    )
+                })
+            },
+            error: function(data) {
+                console.log("error")
+                console.log(data)
+            }
+        })
+    }, 3000)
   }
 </script>
 
