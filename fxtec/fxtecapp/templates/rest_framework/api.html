@@ -153,7 +153,8 @@
         $.ajax({
             method: "GET",
             url: "",
-            success: function(serializer_class) {
+            success: async function(serializer_class) {
+                await new Promise(r => setTimeout(r, 500));
                 $(".demo").empty();
                 $.each(serializer_class, function (key, value) {
                     var priceKey = key;
@@ -266,7 +267,7 @@
                 console.log(data)
             }
         })
-    }, 3000)
+    }, 1000)
   }
 </script>
 

@@ -10,14 +10,23 @@ from .serializers import RobotModelSerializer
 class RobotListAPIView(generics.ListAPIView):
 # def robotview(generics.ListAPIView):
     serializer_class = RobotModelSerializer
-    
+    #def get_queryset(self):
+    '''
     def get_queryset(self):
-            ##### Get equity for first time
+        a = compare()
+        #del a
+        return Robot.objects.all()
+    # return Robot.objects.all()
+    '''
+
+    #class View():
+    def get_queryset(self):
+        ##### Get equity for first time
         countrobot = Robot.objects.all().count() # Count robot
         count = countrobot + 1
         EQT1 = []
         EQT2 = []
-        x = random.randrange(8000000, 9999999, 1000000)
+        #x = random.randrange(8000000, 9999999, 1000000)
         for i in range(1, count):
             equity = list(Robot.objects.filter(id=i).values('EQUITY')) # equity = [{'equity': 8901231.12}]
             equity = equity[0] # equity = {'equity': 8901231.12}
@@ -33,14 +42,14 @@ class RobotListAPIView(generics.ListAPIView):
             TIME1.append(times['TIME']) # 12367541982
         ##### Get time for first time #####
 
-        time.sleep(3) # Wait 3s
+        time.sleep(0.5) # Wait 0.5s
 
         ##### Get equity for second time
         for i in range(1, count):
             equity = list(Robot.objects.filter(id=i).values('EQUITY')) # equity = [{'equity': 8901231.12}]
             equity = equity[0] # equity = {'equity': 8901231.12}
-            # EQT2.append(equity['EQUITY']) # EQT2 = [8901231.12]
-            EQT2.append(x)
+            EQT2.append(equity['EQUITY']) # EQT2 = [8901231.12]
+            #EQT2.append(x)
         ##### Get equity for second time #####
 
         ##### Get time for second time
@@ -52,14 +61,15 @@ class RobotListAPIView(generics.ListAPIView):
 
         ##### Compare equity
         for i in range(countrobot):
-            if EQT1[i] >= EQT2[i]:
-                i = i + 1 # EQT_list begin with 0 but robot id begins with 1
-                # EQT3.append('True')
-                Robot.objects.filter(id=i).update(EQTCHECK='True')
-            else:
-                i = i + 1
-                # EQT3.append('False')
-                Robot.objects.filter(id=i).update(EQTCHECK='False')
+            if EQT1[i] != EQT2[i]:
+                if EQT1[i] < EQT2[i]:
+                    i = i + 1 # EQT_list begin with 0 but robot id begins with 1
+                    # EQT3.append('True')
+                    Robot.objects.filter(id=i).update(EQTCHECK='True')
+                else:
+                    i = i + 1
+                    # EQT3.append('False')
+                    Robot.objects.filter(id=i).update(EQTCHECK='False')
         ##### Compare equity #####
 
         ##### Compare time
@@ -70,7 +80,11 @@ class RobotListAPIView(generics.ListAPIView):
             else:
                 Robot.objects.filter(id=i).update(TIMECHECK='1')
         ##### Compare time #####
+
+        del EQT1, TIME1, EQT2, TIME2 # Destructor
+
         return Robot.objects.all()
+
 
 
 '''
