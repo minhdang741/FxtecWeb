@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Refresh" content="3">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-colors-2021.css" />
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" />
+
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+  <!-- Popper JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+  <!-- Latest compiled JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="https://kit.fontawesome.com/a811b5afd0.js" crossorigin="anonymous"></script>
+  <title>Ferox Technologies - Hướng dẫn</title>
+  <style>
+    html,
+    body,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5 {
+      font-family: "Raleway", sans-serif;
+    }
+
+    footer {
+      text-align: center;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      border-top: 1px solid white;
+    }
+
+    thead {
+      font-style: oblique;
+      font-size: 23px;
+    }
+
+    tbody {
+      text-align: center;
+      font-size: 20px;
+    }
+
+    td {
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .view {
+      text-align: center;
+    }
+
+    table {
+      text-decoration: none;
+    }
+
+    th {
+      width: 4%;
+    }
+
+    a {
+      text-decoration: none;
+    }
+  </style>
+</head>
+
+<body style="background-color: #3c3c3c;">
+  <!-- Top Container -->
+  <div class="w3-top">
+    <div class="w3-bar w3-2021-inkwell w3-large" style="border-bottom: 1px solid white">
+      <span class="w3-bar-item">FEROX TECHNOLOGIES </span>
+      <a href="/"><button class="w3-button w3-2021-inkwell w3-right" style="width: 100px">
+          Logout
+        </button></a>
+      <!--<span class="w3-bar-item w3-right w3-hover-text-red"><a href="Signin2.html">Logout</a></span>-->
+      <button class="w3-button w3-2021-inkwell w3-right" style="width: 100px">
+        Filter
+      </button>
+      <button class="w3-button w3-2021-inkwell w3-right" style="width: 100px">
+        Expried
+      </button>
+      <button class="w3-button w3-2021-inkwell w3-right" style="width: 100px">
+        Warning
+      </button>
+      <button class="w3-button w3-2021-inkwell w3-right" style="width: 100px">
+        Error
+      </button>
+      <button class="w3-button w3-2021-inkwell w3-right" style="width: 140px" onclick="myFunction()">
+        Show All
+      </button>
+      <div class="w3-clear"></div>
+    </div>
+  </div>
+
+  <!-- Overlay effect when opening sidebar on small screens -->
+  <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor: pointer"
+    title="close side menu" id="myOverlay"></div>
+
+  <!-- !PAGE CONTENT! -->
+  <div class="w3-main" id="show" style="margin-top: 43px; display: block">
+    <!-- Header -->
+    <header class="w3-container" style="padding-top: 22px"></header>
+    <section class="w3-container w3-center" style="padding-top: 50px"></section>
+    <section class="w3-container">
+      <div class="w3-panel" style="padding: 0px 3%">
+        <table class="w3-responsive w3-table w3-bordered w3-centered w3-card ">
+          <thead class="w3-black">
+            <th style="width: 6%">Login</th>
+            <th style="width: 4%">VPS</th>
+            <th>Currency</th>
+            <th style="width: 6%">Balance</th>
+            <th style="width: 6%">Equity</th>
+            <th style="width: 6%">Margin</th>
+            <th style="width: 6%">Bear</th>
+            <th>Run</th>
+            <th>ROI</th>
+            <th>Warning</th>
+            <th>Connect</th>
+          </thead>
+          {% for dt in robotdata %}
+          <!-- Check robot connection-->
+          {% if dt.TIMECHECK == 1 %}
+          <!-- Check equity-->
+          {% if dt.EQTCHECK == True %}
+          <!-- Check warning -->
+          {% if dt.ACCOUNT_WARNING_LEVEL == 0 %}
+          <tr class="w3-text-green w3-hover-blue">
+            <!-- timecheck = 1, eqtcheck = true-->
+            <td>{{ dt.LOGIN }}</td>
+            <td>{{ dt.VPS }}</td>
+            <td>{{ dt.CURRENCY }}</td>
+            <td>{{ dt.BALANCE }}</td>
+            <td>{{ dt.EQUITY }}</td>
+            <td>{{ dt.MARGIN }}</td>
+            <td>{{ dt.BEAR_LEVEL }}</td>
+            <td>{{ dt.RUN }}</td>
+            <td>{{ dt.ROI_LEVEL }}</td>
+            <td>{{ dt.ACCOUNT_WARNING_LEVEL }}</td>
+            <td>{{ dt.TIMECHECK }}</td>
+          </tr>
+          {% elif dt.ACCOUNT_WARNING_LEVEL == 1 %}
+          <tr class="w3-text-green w3-hover-blue">
+            <!-- timecheck = 1, eqtcheck = true-->
+            <td>{{ dt.LOGIN }}</td>
+            <td>{{ dt.VPS }}</td>
+            <td>{{ dt.CURRENCY }}</td>
+            <td>{{ dt.BALANCE }}</td>
+            <td>{{ dt.EQUITY }}</td>
+            <td>{{ dt.MARGIN }}</td>
+            <td>{{ dt.BEAR_LEVEL }}</td>
+            <td>{{ dt.RUN }}</td>
+            <td>{{ dt.ROI_LEVEL }}</td>
+            <td class="w3-yellow">{{ dt.ACCOUNT_WARNING_LEVEL }}</td>
+            <td>{{ dt.TIMECHECK }}</td>
+          </tr>
+          {% elif dt.ACCOUNT_WARNING_LEVEL == 2 %}
+          <tr class="w3-text-green w3-hover-blue">
+            <!-- timecheck = 1, eqtcheck = true-->
+            <td>{{ dt.LOGIN }}</td>
+            <td>{{ dt.VPS }}</td>
+            <td>{{ dt.CURRENCY }}</td>
+            <td>{{ dt.BALANCE }}</td>
+            <td>{{ dt.EQUITY }}</td>
+            <td>{{ dt.MARGIN }}</td>
+            <td>{{ dt.BEAR_LEVEL }}</td>
+            <td>{{ dt.RUN }}</td>
+            <td>{{ dt.ROI_LEVEL }}</td>
+            <td class="w3-orange">{{ dt.ACCOUNT_WARNING_LEVEL }}</td>
+            <td>{{ dt.TIMECHECK }}</td>
+          </tr>
+          {% elif dt.ACCOUNT_WARNING_LEVEL == 3 %}
+          <tr class="w3-text-green w3-hover-blue">
+            <!-- timecheck = 1, eqtcheck = true-->
+            <td>{{ dt.LOGIN }}</td>
+            <td>{{ dt.VPS }}</td>
+            <td>{{ dt.CURRENCY }}</td>
+            <td>{{ dt.BALANCE }}</td>
+            <td>{{ dt.EQUITY }}</td>
+            <td>{{ dt.MARGIN }}</td>
+            <td>{{ dt.BEAR_LEVEL }}</td>
+            <td>{{ dt.RUN }}</td>
+            <td>{{ dt.ROI_LEVEL }}</td>
+            <td class="w3-red">{{ dt.ACCOUNT_WARNING_LEVEL }}</td>
+            <td>{{ dt.TIMECHECK }}</td>
+          </tr>
+          {% endif %}
+          <!--End Check warning -->
+          {% else %}
+          <!-- timecheck = 1, eqtcheck = false-->
+          <!-- Check warning -->
+          {% if dt.ACCOUNT_WARNING_LEVEL == 0 %}
+          <!-- timecheck = 1, eqtcheck = false-->
+          <tr class="w3-text-red w3-hover-blue">
+            <td>{{ dt.LOGIN }}</td>
+            <td>{{ dt.VPS }}</td>
+            <td>{{ dt.CURRENCY }}</td>
+            <td>{{ dt.BALANCE }}</td>
+            <td>{{ dt.EQUITY }}</td>
+            <td>{{ dt.MARGIN }}</td>
+            <td>{{ dt.BEAR_LEVEL }}</td>
+            <td>{{ dt.RUN }}</td>
+            <td>{{ dt.ROI_LEVEL }}</td>
+            <td>{{ dt.ACCOUNT_WARNING_LEVEL }}</td>
+            <td>{{ dt.TIMECHECK }}</td>
+          </tr>
+          {% elif dt.ACCOUNT_WARNING_LEVEL == 1 %}
+          <!-- timecheck = 1, eqtcheck = false-->
+          <tr class="w3-text-green w3-hover-blue">
+            <td>{{ dt.LOGIN }}</td>
+            <td>{{ dt.VPS }}</td>
+            <td>{{ dt.CURRENCY }}</td>
+            <td>{{ dt.BALANCE }}</td>
+            <td>{{ dt.EQUITY }}</td>
+            <td>{{ dt.MARGIN }}</td>
+            <td>{{ dt.BEAR_LEVEL }}</td>
+            <td>{{ dt.RUN }}</td>
+            <td>{{ dt.ROI_LEVEL }}</td>
+            <td class="w3-yellow">{{ dt.ACCOUNT_WARNING_LEVEL }}</td>
+            <td>{{ dt.TIMECHECK }}</td>
+          </tr>
+          {% elif dt.ACCOUNT_WARNING_LEVEL == 2 %}
+          <!-- timecheck = 1, eqtcheck = false-->
+          <tr class="w3-text-red w3-hover-blue">
+            <td>{{ dt.LOGIN }}</td>
+            <td>{{ dt.VPS }}</td>
+            <td>{{ dt.CURRENCY }}</td>
+            <td>{{ dt.BALANCE }}</td>
+            <td>{{ dt.EQUITY }}</td>
+            <td>{{ dt.MARGIN }}</td>
+            <td>{{ dt.BEAR_LEVEL }}</td>
+            <td>{{ dt.RUN }}</td>
+            <td>{{ dt.ROI_LEVEL }}</td>
+            <td class="w3-orange">{{ dt.ACCOUNT_WARNING_LEVEL }}</td>
+            <td>{{ dt.TIMECHECK }}</td>
+          </tr>
+          {% elif dt.ACCOUNT_WARNING_LEVEL == 3 %}
+          <!-- timecheck = 1, eqtcheck = false-->
+          <tr class="w3-text-red w3-hover-blue">
+            <td>{{ dt.LOGIN }}</td>
+            <td>{{ dt.VPS }}</td>
+            <td>{{ dt.CURRENCY }}</td>
+            <td>{{ dt.BALANCE }}</td>
+            <td>{{ dt.EQUITY }}</td>
+            <td>{{ dt.MARGIN }}</td>
+            <td>{{ dt.BEAR_LEVEL }}</td>
+            <td>{{ dt.RUN }}</td>
+            <td>{{ dt.ROI_LEVEL }}</td>
+            <td class="w3-red">{{ dt.ACCOUNT_WARNING_LEVEL }}</td>
+            <td>{{ dt.TIMECHECK }}</td>
+          </tr>
+          {% endif %}
+          <!-- End Check warning -->
+          {% endif %}
+          <!-- End Check equity -->
+          {% else %}
+          <!-- timecheck = 0-->
+          <tr class="w3-hover-blue w3-text-white">
+            <td>{{ dt.LOGIN }}</td>
+            <td>{{ dt.VPS }}</td>
+            <td>{{ dt.CURRENCY }}</td>
+            <td>{{ dt.BALANCE }}</td>
+            <td>{{ dt.EQUITY }}</td>
+            <td>{{ dt.MARGIN }}</td>
+            <td>{{ dt.BEAR_LEVEL }}</td>
+            <td>{{ dt.RUN }}</td>
+            <td>{{ dt.ROI_LEVEL }}</td>
+            <td>{{ dt.ACCOUNT_WARNING_LEVEL }}</td>
+            <td class="w3-red">{{ dt.TIMECHECK }}</td>
+          </tr>
+          {% endif %}
+          <!-- End Check robot connection -->
+          {% endfor %}
+        </table>
+      </div>
+    </section>
+  </div>
+</body>
+<script>
+  function myFunction() {
+    var x = document.getElementById("show");
+    if (x.style.display === "none") {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }
+  }
+</script>
+
+</html>
